@@ -21,8 +21,8 @@ class Polinomio{
 //Constructor con default
 Polinomio::Polinomio(int a,vector<double> B = {0}) {
   grado=a;
-  if (B.size() == (grado+1)){
-    pol = B;
+  if (A.size() == (grado+1)){
+    pol = A;
     }
   else {
     for (int i=0;i<grado+1;++i)
