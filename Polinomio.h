@@ -19,10 +19,10 @@ class Polinomio{
 };
 
 //Constructor con default
-Polinomio::Polinomio(int a,vector<double> A = {0}) {
+Polinomio::Polinomio(int a,vector<double> B = {0}) {
   grado=a;
-  if (A.size() == (grado+1)){
-    pol = A;
+  if (B.size() == (grado+1)){
+    pol = B;
     }
   else {
     for (int i=0;i<grado+1;++i)
