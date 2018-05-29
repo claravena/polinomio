@@ -6,11 +6,16 @@
 using namespace std;
 
 int main(){
-  vector<double> v1 = {-4,2,-5,1};
-  vector<double> v2 = {8,7,3};
+  //vector<double> v1 = {-4.,2.,-5.,1.};
+  //vector<double> v2 = {8.,7.,3.};
+  vector<double> v1;
+  v1.push_back(8);
+  v1.push_back(7);
+  v1.push_back(3);
   Polinomio<double> num(v1);
-  Polinomio<double> den(v2);
-  int N=30; 
+  cout << num<<endl; 
+  //Polinomio<double> den(v2);
+  /*int N=30; 
   ofstream archivo("datos.dat"); 
   double contador = -5.0;
   for (int i=0; i<N;++i){
@@ -33,7 +38,7 @@ int main(){
     archivo_Chebyshev <<contador <<" "<<cos(exp(Num/Den))<<endl;
     }
   archivo_Chebyshev.close();
-  
+  */
  return 0;
 }
 
