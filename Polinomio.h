@@ -15,14 +15,16 @@ class Polinomio{
  public:
   Polinomio(vector<T>);
   ~Polinomio();
+  Polinomio(const Polinomio<T> &);
   void set_polinomio(vector<T>);
   int get_grado();
-  vector<T> get_pol();
-  vector<T> div(Polinomio);
+  vector<T> get_pol() const ;
+  vector<T> div(Polinomio<T>);
   T Coef(int) const; 
   T operator()(T) const;
   Polinomio<T> derivada();
   Polinomio<T> integral(T);
+  Polinomio & operator = (const Polinomio<T> &); 
   
   
 
@@ -43,6 +45,13 @@ template <class T>
 Polinomio<T>::~Polinomio(){
 }
 
+//contructor de copia 
+template <class T>
+Polinomio<T>::Polinomio(const Polinomio<T> & P){
+  pol = P.get_pol(); 
+}
+
+
 //funcion entrega el grado del polinomio 
 template <class T>
 int Polinomio<T>::get_grado(){ 
@@ -50,7 +59,7 @@ int Polinomio<T>::get_grado(){
 }
 //funcion entrega el vector que contiene los coeficiente del polinomio  
 template <class T>
-vector<T> Polinomio<T>::get_pol(){
+vector<T> Polinomio<T>::get_pol() const{
   return pol; 
 }
 
@@ -137,6 +146,17 @@ ostream & operator << (ostream & os ,Polinomio<T> M){
   os << endl; 
   return os;
 }
+
+//--------------------------Operador asignacion------------------------------
+
+template <class T>
+Polinomio<T> &Polinomio<T>::operator = (const Polinomio<T> & P){
+  vector<T> v_copia=P.get_pol();  
+  pol= v_copia;
+  return *this; 
+}
+
+
 
 //Operador Suma
 template <class T>
