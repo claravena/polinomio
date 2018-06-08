@@ -24,8 +24,10 @@ class Polinomio{
   T operator()(T) const;
   Polinomio<T> derivada();
   Polinomio<T> integral(T);
-  Polinomio & operator = (const Polinomio<T> &); 
-  
+  Polinomio & operator = (const Polinomio<T> &);
+  void operator +=(const Polinomio<T> & P); 
+  void operator -=(const Polinomio<T> & P); 
+  Polinomio & operator *=(const Polinomio<T> & P);
   
 
 };
@@ -146,6 +148,61 @@ ostream & operator << (ostream & os ,Polinomio<T> M){
   os << endl; 
   return os;
 }
+
+//-----------------------Operador += ----------------------------------------
+template <class T>
+void Polinomio<T>::operator +=(const Polinomio<T> & P){
+  vector<T> otro_pol = P.get_pol();
+  if (pol.size()>otro_pol.size()){
+    for (int i=0; i<pol.size(); ++i){
+      pol[i]+=otro_pol[i];
+    }
+  }
+  else{
+    for (int i=0; i< otro_pol.size(); ++i){
+      pol[i]+=otro_pol[i];
+    }
+  }
+}
+
+//-----------------------Operador -= ----------------------------------------
+template <class T>
+void Polinomio<T>::operator -=(const Polinomio<T> & P){
+  vector<T> otro_pol = P.get_pol();
+  if (pol.size()>otro_pol.size()){
+    for (int i=0; i<pol.size(); ++i){
+      pol[i]-=otro_pol[i];
+    }
+  }
+  else{
+    for (int i=0; i< otro_pol.size(); ++i){
+      pol[i]-=otro_pol[i];
+    }
+  }
+}
+
+
+//-----------------------Operador *= ----------------------------------------
+template <class T>
+Polinomio<T> & Polinomio<T>::operator *=(const Polinomio<T> & P){
+  vector<T> v_producto;
+  vector<T> otro_pol=P.get_pol();
+  int grado= pol.size()+otro_pol.size()-1;
+  //llenar el nuevo vector polinomio
+  for (int k=0; k<grado+1; ++k){
+    v_producto.push_back(T(0));
+  }
+  for (int j=otro_pol.size()-1; j>=0; --j ){
+    for(int i=0; i<=pol.size()-1; ++i){
+      v_producto[i+j]+=(otro_pol[j]*pol[i]);
+    }
+  }
+  pol = v_producto; 
+  return *this;
+}
+
+
+
 
 //--------------------------Operador asignacion------------------------------
 
