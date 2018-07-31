@@ -1,41 +1,40 @@
 #include <iostream>
-#include "Polinomio.h"
-#include "cmath"
-#include <fstream>
+#include "interpolador.cc"
 
 using namespace std;
 
 int main(){
-  //vector<double> v1 = {-4,2,-5,1};
-  //vector<double> v2 = {8,7,3};
-  //Polinomio<double> num(v1);
-  //Polinomio<double> den(v2);
-
-
+  vector<double> v1 = {-4,2,-5,1};
+  vector<double> v2 = {8,7,3};
+  Polinomio<double> num(v1);
+  Polinomio<double> den(v2);
+  Polinomio<double> V1(0);
   
-  /*int N=30; 
-  ofstream archivo("datos.dat"); 
-  double contador = -5.0;
-  for (int i=0; i<N;++i){
-    ofstream archivo("datos.dat", ios::app);
-    double Num= num(contador);
-    double Den= den(contador); 
-    archivo <<contador <<" "<<cos(exp(Num/Den))<<endl;
-    //cout<<contador<<endl;
-    contador += (10./(N-1));
-  }
-  archivo.close();
+  double N=10; // numero de intervalos 
+  double a=-5; // valor inicial de intervalo
+  //Funciones que hacen puntos.
+  double b=5;
+  ofstream datos;
+  datos.open("datos.dat");
+  puntos_equiespacio(N,a,b,num,den);
+  //puntos_Chebyshev(N,a,num,den);
+  datos.close();
 
-  //nodos de Chebyshev
-  ofstream archivo_Chebyshev("datos_Chebyshev.dat"); 
-  for (int i=1; i<(N+1);++i){
-    ofstream archivo_Chebyshev("datos_Chebyshev.dat", ios::app);
-    double contador = 5*cos(((2*i-1)*M_PI)/(2*N)); 
-    double Num= num(contador);
-    double Den= den(contador);
-    archivo_Chebyshev <<contador <<" "<<cos(exp(Num/Den))<<endl;
-    }
-    archivo_Chebyshev.close();*/
- return 0;
+
+  ifstream datos1;
+  datos1.open("datos.dat");
+  splines_cubicos(datos1);
+
+
+  //ifstream datos2;
+  //datos2.open("datos_Chebyshev.dat");
+  //cout<<lagrange(datos1)<<endl;
+  //cout<<lagrange(datos2)<<endl;
+  datos1.close();
+  //V1=den;
+  //cout << num <<endl;
+  //cout << (4.0-num).get_grado()<<endl;
+  
+   return 0;
+   
 }
-
